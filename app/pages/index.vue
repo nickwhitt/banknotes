@@ -1,5 +1,5 @@
 <template>
-  <UContainer>
+  <UContainer class="mt-8 mb-20">
     <h1 class="my-8 text-3xl sm:text-4xl font-semibold tracking-tight text-pretty">
       $5 Federal Reserve Note
     </h1>
@@ -8,20 +8,28 @@
       Series 2021
     </h2>
 
-    <h3 class="my-4 text-xl sm:text-2xl font-semibold tracking-tight text-pretty">
-      Boston
-    </h3>
+    <div class="my-4 flex items-center justify-between">
+      <h3 class="text-xl sm:text-2xl font-semibold tracking-tight text-pretty">
+        Boston
+      </h3>
+      <div class="flex gap-4 text-center">
+        <div>
+          <p class="text-nowrap">F-1999A</p>
+          <p>{{ formatNumber(57600000 - 1 + 1) }}</p>
+        </div>
+        <div>
+          <p class="text-nowrap">F-1999A*</p>
+          <p>{{ formatNumber(500000 - 1 + 1 + 4800000 - 3200001 + 1) }}</p>
+        </div>
+      </div>
+    </div>
 
-    <ol class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      <li>
-        <UCard :ui="{ body: 'p-0 sm:p-0' }">
+    <ol>
+      <li class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <UCard :ui="{ body: 'p-0 sm:p-0', root: 'h-fit' }">
           <template #header>
-            <div class="flex justify-between">
-              <p class="font-semibold text-pretty">Regular Notes</p>
-              <p>{{ formatNumber(57600000 - 1 + 1) }}</p>
-            </div>
+            <h4 class="font-semibold">QAA Block</h4>
           </template>
-
           <UTable :data="data" :ui="{ thead: '[&>tr]:after:h-0' }">
             <template #serials-cell="{ row }">
               <ul class="font-mono">
