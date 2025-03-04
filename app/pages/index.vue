@@ -19,8 +19,7 @@
           <div class="hidden sm:table-cell px-4 py-3.5">Regular</div>
           <div class="hidden sm:table-cell px-4 py-3.5">Star</div>
         </div>
-        <NuxtLink :to="`/series/${run.series}#${datum.denom}`" v-for="datum in run.data"
-          class="table-row text-(--ui-text-muted)">
+        <NuxtLink to="/s2021" v-for="datum in run.data" class="table-row text-(--ui-text-muted)">
           <div class="relative table-cell p-4 border-b border-(--ui-border)">{{ datum.catalog }}</div>
           <div class="table-cell p-4 border-b border-(--ui-border)">{{ datum.denom }}</div>
           <div class="table-cell p-4 border-b border-(--ui-border)">{{ datum.facility }}</div>
