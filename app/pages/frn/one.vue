@@ -69,8 +69,11 @@
                     <div>
                       <div class="flex items-center">
                         <p v-if="run.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
-                        <p>{{ new Date(run.year, run.month).toLocaleString('en-us', { year: 'numeric', month: 'short' })
-                        }}</p>
+                        <p>
+                          {{ new Date(run.year, run.month).toLocaleString('en-us', {
+                            year: 'numeric', month: 'short'
+                          })}}
+                        </p>
                       </div>
                       <p>{{ run.facility.city }}</p>
                     </div>
@@ -310,15 +313,15 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'FA', block: 'A', runs: [] },
-          { label: 'FB', block: 'B', runs: [] },
-          { label: 'FC', block: 'C', runs: [] },
-          { label: 'FD', block: 'D', runs: [] },
-          { label: 'FE', block: 'E', runs: [] },
-          { label: 'FF', block: 'F', runs: [] },
-          { label: 'FG', block: 'G', runs: [] },
-          { label: 'FH', block: 'H', runs: [] },
-          { label: 'FI', block: 'I', runs: [] },
+          { label: 'FA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'A') || [] },
+          { label: 'FB', block: 'B', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'B') || [] },
+          { label: 'FC', block: 'C', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'C') || [] },
+          { label: 'FD', block: 'D', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'D') || [] },
+          { label: 'FE', block: 'E', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'E') || [] },
+          { label: 'FF', block: 'F', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'F') || [] },
+          { label: 'FG', block: 'G', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'G') || [] },
+          { label: 'FH', block: 'H', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'H') || [] },
+          { label: 'FI', block: 'I', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === 'I') || [] },
         ]
       },
       {
@@ -337,12 +340,12 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'GA', block: 'A', runs: [] },
-          { label: 'GB', block: 'B', runs: [] },
-          { label: 'GC', block: 'C', runs: [] },
-          { label: 'GD', block: 'D', runs: [] },
-          { label: 'GE', block: 'E', runs: [] },
-          { label: 'GF', block: 'F', runs: [] },
+          { label: 'GA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'A') || [] },
+          { label: 'GB', block: 'B', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'B') || [] },
+          { label: 'GC', block: 'C', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'C') || [] },
+          { label: 'GD', block: 'D', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'D') || [] },
+          { label: 'GE', block: 'E', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'E') || [] },
+          { label: 'GF', block: 'F', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === 'F') || [] },
         ]
       },
       {
@@ -362,7 +365,7 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'HA', block: 'A', runs: [] },
+          { label: 'HA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.h.letter && item.block === 'A') || [] },
         ]
       },
     ]
@@ -373,7 +376,7 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'IA', block: 'A', runs: [] },
+          { label: 'IA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.i.letter && item.block === 'A') || [] },
         ]
       },
     ]
@@ -384,7 +387,7 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'JA', block: 'A', runs: [] },
+          { label: 'JA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.j.letter && item.block === 'A') || [] },
         ]
       },
     ]
@@ -395,9 +398,9 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'KA', block: 'A', runs: [] },
-          { label: 'KB', block: 'B', runs: [] },
-          { label: 'KC', block: 'C', runs: [] },
+          { label: 'KA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.k.letter && item.block === 'A') || [] },
+          { label: 'KB', block: 'B', runs: runs.value?.filter((item) => item.bank.letter === banks.k.letter && item.block === 'B') || [] },
+          { label: 'KC', block: 'C', runs: runs.value?.filter((item) => item.bank.letter === banks.k.letter && item.block === 'C') || [] },
         ]
       },
     ]
@@ -408,13 +411,13 @@ const data: Series[] = [
     blocks: [
       {
         label: 'Regular', printed: 0, runs: [
-          { label: 'LA', block: 'A', runs: [] },
-          { label: 'LB', block: 'B', runs: [] },
-          { label: 'LC', block: 'C', runs: [] },
-          { label: 'LD', block: 'D', runs: [] },
-          { label: 'LE', block: 'E', runs: [] },
-          { label: 'LF', block: 'F', runs: [] },
-          { label: 'LG', block: 'G', runs: [] },
+          { label: 'LA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'A') || [] },
+          { label: 'LB', block: 'B', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'B') || [] },
+          { label: 'LC', block: 'C', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'C') || [] },
+          { label: 'LD', block: 'D', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'D') || [] },
+          { label: 'LE', block: 'E', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'E') || [] },
+          { label: 'LF', block: 'F', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'F') || [] },
+          { label: 'LG', block: 'G', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === 'G') || [] },
         ]
       },
       {
