@@ -1,7 +1,13 @@
-import type { Catalog } from "./Catalog"
+import type { Bank } from "./Bank"
 import type { Facility } from "./Facility"
 
 export type Run = {
-  facility: Facility
-  catalogs: Catalog[]
+    year: number
+    month: number
+    facility: Facility
+    bank: Bank
+    block: string
+    start: number
+    end: number
+    owned?: boolean
 }

@@ -9,16 +9,17 @@
     </h2>
 
     <article class="grid md:grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2">
-      <UCard v-for="bank in banks" :ui="{ body: 'ps-0 sm:ps-0' }">
+      <UCard v-for="bank in data" :ui="{ body: 'ps-0 sm:ps-0', header: 'py-2' }">
         <template #header>
           <div class="flex items-center justify-between">
             <div class="flex items-center">
-              <h3 class="text-lg font-semibold tracking-tight">
-                {{ bank.bank.city }}
-              </h3>
-              <p v-if="bank.owned" class="ml-0.5 text-xs text-(--ui-success)">√</p>
+              <p v-if="bank.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+              <h3 class="text-lg font-semibold tracking-tight">{{ bank.bank.city }}</h3>
             </div>
-            <p class="text-sm/6">{{ formatNumber(bank.printed) }}</p>
+            <p>{{ formatNumber(bank.printed) }}</p>
+            <div class="flex items-center h-12 overflow-hidden">
+              <NuxtImg :src="bank.bank.seal" sizes="98px" class="-mt-4" />
+            </div>
           </div>
         </template>
 
@@ -29,17 +30,17 @@
                 <div class="col-span-3 flex items-end justify-between">
                   <div>
                     <div class="flex items-center">
+                      <p v-if="item.dc?.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
                       <p class="text-sm/6">{{ item.dc?.catalog }}</p>
-                      <p v-if="item.dc?.owned" class="ml-0.5 text-xs text-(--ui-success)">√</p>
                     </div>
-                    <h4 class="font-semibold tracking-tight">Washington</h4>
+                    <h4 class="font-semibold tracking-tight">{{ dc.city }}</h4>
                   </div>
                   <div class="text-right">
                     <div class="flex items-center justify-end">
-                      <p v-if="item.fw?.owned" class="mr-0.5 text-xs text-(--ui-success)">√</p>
                       <p class="text-sm/6">{{ item.fw?.catalog }}</p>
+                      <p v-if="item.fw?.owned" class="-me-3.5 ms-1 text-sm text-(--ui-success)">√</p>
                     </div>
-                    <h4 class="font-semibold tracking-tight">Fort Worth</h4>
+                    <h4 class="font-semibold tracking-tight">{{ fw.city }}</h4>
                   </div>
                 </div>
                 <h4 class="text-right font-semibold tracking-tight">Printed</h4>
@@ -67,10 +68,11 @@
                   <li v-for="run in item.runs" class="not-first:pt-2 not-last:pb-2 flex items-center justify-between">
                     <div>
                       <div class="flex items-center">
-                        <p>{{ run.date }}</p>
-                        <p v-if="run.owned" class="ml-0.5 text-xs text-(--ui-success)">√</p>
+                        <p v-if="run.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+                        <p>{{ new Date(run.year, run.month).toLocaleString('en-us', { year: 'numeric', month: 'short' })
+                        }}</p>
                       </div>
-                      <p>{{ run.facility }}</p>
+                      <p>{{ run.facility.city }}</p>
                     </div>
                     <div class="font-mono">
                       <p>{{ formatSerialNumber(run.start, item.block, bank.bank.letter) }}</p>
@@ -92,19 +94,13 @@
 import formatNumber from '~~/utils/formatNumber';
 import formatSerialNumber from '~~/utils/formatSerialNumber';
 import type { TabsItem } from '@nuxt/ui';
-import { boston, cleveland, newYork, philadelphia, type Bank } from '~~/types/Bank';
-
-interface PrintRun {
-  date: string
-  facility: string
-  start: number
-  end: number
-  owned?: boolean
-}
+import { banks, type Bank } from '~~/types/Bank';
+import { dc, fw } from '~~/types/Facility';
+import type { Run } from '~~/types/Run';
 
 interface BlockRun extends TabsItem {
   block: string
-  runs: PrintRun[]
+  runs: Run[]
 }
 
 interface Catalog {
@@ -128,9 +124,12 @@ interface Series {
   blocks: SeriesBlock[]
 }
 
-const banks: Series[] = [
+const { data: runs } = await useFetch('/api/bep/one/2017a')
+runs.value?.sort((a, b) => new Date(a.year, a.month).getTime() - new Date(b.year, b.month).getTime())
+
+const data: Series[] = [
   {
-    bank: boston,
+    bank: banks.a,
     printed: 100090000,
     owned: true,
     blocks: [
@@ -143,18 +142,12 @@ const banks: Series[] = [
           {
             label: 'AA',
             block: 'A',
-            runs: [
-              { date: 'Dec 2019', facility: 'Washington', start: 1, end: 12800000 },
-              { date: 'Dec 2021', facility: 'Fort Worth', start: 12800001, end: 51200000 },
-              { date: 'Jan 2022', facility: 'Fort Worth', start: 51200001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.a.letter && item.block === 'A').sort((a, b) => a.start - b.start) || []
           },
           {
             label: 'AB',
             block: 'B',
-            runs: [
-              { date: 'Jan 2022', facility: 'Fort Worth', start: 1, end: 640000, owned: true },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.a.letter && item.block === 'B') || []
           },
         ]
       },
@@ -166,17 +159,14 @@ const banks: Series[] = [
           {
             label: 'A*',
             block: '*',
-            runs: [
-              { date: 'Dec 2019', facility: 'Washington', start: 1, end: 3200000 },
-              { date: 'Jan 2020', facility: 'Washington', start: 3200001, end: 3450000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.a.letter && item.block === '*') || []
           }
         ]
       }
     ]
   },
   {
-    bank: newYork,
+    bank: banks.b,
     printed: 365040000,
     owned: true,
     blocks: [
@@ -189,37 +179,22 @@ const banks: Series[] = [
           {
             label: 'BA',
             block: 'A',
-            runs: [
-              { date: 'Dec 2019', facility: 'Washington', start: 1, end: 25600000 },
-              { date: 'Jan 2020', facility: 'Washington', start: 25600001, end: 89600000 },
-              { date: 'Feb 2020', facility: 'Washington', start: 89600001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.b.letter && item.block === 'A') || []
           },
           {
             label: 'BB',
             block: 'B',
-            runs: [
-              { date: 'Feb 2020', facility: 'Washington', start: 1, end: 57600000 },
-              { date: 'May 2020', facility: 'Washington', start: 57600001, end: 83200000 },
-              { date: 'Jan 2022', facility: 'Fort Worth', start: 83200001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.b.letter && item.block === 'B') || []
           },
           {
             label: 'BC',
             block: 'C',
-            runs: [
-              { date: 'Jan 2022', facility: 'Fort Worth', start: 1, end: 1920000 },
-              { date: 'Feb 2022', facility: 'Fort Worth', start: 1920001, end: 32000000 },
-              { date: 'Mar 2022', facility: 'Fort Worth', start: 32000001, end: 89600000 },
-              { date: 'Apr 2022', facility: 'Fort Worth', start: 89600001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.b.letter && item.block === 'C') || []
           },
           {
             label: 'BD',
             block: 'D',
-            runs: [
-              { date: 'Apr 2022', facility: 'Fort Worth', start: 1, end: 70400000, owned: true },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.b.letter && item.block === 'D') || []
           }
         ]
       },
@@ -232,18 +207,14 @@ const banks: Series[] = [
           {
             label: 'B*',
             block: '*',
-            runs: [
-              { date: 'Feb 2020', facility: 'Washington', start: 1, end: 3200000 },
-              { date: 'Apr 2022', facility: 'Fort Worth', start: 3200001, end: 3840000 },
-              { date: 'Apr 2022', facility: 'Fort Worth', start: 6400001, end: 9600000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.b.letter && item.block === '*') || []
           }
         ]
       },
     ]
   },
   {
-    bank: philadelphia,
+    bank: banks.c,
     printed: 96000000,
     blocks: [
       {
@@ -254,17 +225,14 @@ const banks: Series[] = [
           {
             label: 'CA',
             block: 'A',
-            runs: [
-              { date: 'May 2022', facility: 'Fort Worth', start: 1, end: 83200000 },
-              { date: 'Jun 2022', facility: 'Fort Worth', start: 83200001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.c.letter && item.block === 'A') || []
           }
         ]
       }
     ]
   },
   {
-    bank: cleveland,
+    bank: banks.d,
     printed: 346100000,
     owned: true,
     blocks: [
@@ -277,35 +245,22 @@ const banks: Series[] = [
           {
             label: 'DA',
             block: 'A',
-            runs: [
-              { date: 'Mar 2020', facility: 'Washington', start: 1, end: 64000000 },
-              { date: 'Apr 2020', facility: 'Washington', start: 64000001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.d.letter && item.block === 'A') || []
           },
           {
             label: 'DB',
             block: 'B',
-            runs: [
-              { date: 'Apr 2020', facility: 'Washington', start: 1, end: 38400000 },
-              { date: 'May 2021', facility: 'Fort Worth', start: 38400001, end: 76800000 },
-              { date: 'Jun 2022', facility: 'Fort Worth', start: 76800001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.d.letter && item.block === 'B') || []
           },
           {
             label: 'DC',
             block: 'C',
-            runs: [
-              { date: 'Jun 2022', facility: 'Fort Worth', start: 1, end: 44800000 },
-              { date: 'Jul 2022', facility: 'Fort Worth', start: 44800001, end: 96000000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.d.letter && item.block === 'C') || []
           },
           {
             label: 'DD',
             block: 'D',
-            runs: [
-              { date: 'Jul 2022', facility: 'Fort Worth', start: 1, end: 25600000 },
-              { date: 'Aug 2022', facility: 'Fort Worth', start: 25600001, end: 57600000, owned: true },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.d.letter && item.block === 'D') || []
           }
         ]
       },
@@ -317,13 +272,160 @@ const banks: Series[] = [
           {
             label: 'D*',
             block: '*',
-            runs: [
-              { date: 'Jul 2022', facility: 'Fort Worth', start: 1, end: 500000 },
-            ]
+            runs: runs.value?.filter((item) => item.bank.letter === banks.d.letter && item.block === '*') || []
           }
         ]
       }
     ]
   },
+  {
+    bank: banks.e,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular',
+        printed: 332800000,
+        dc: { printed: 153600000, pct: 46, catalog: 'F-3006E' },
+        fw: { printed: 179200000, pct: 54, catalog: 'F-3005E' },
+        runs: [
+          { label: 'EA', block: 'A', runs: runs.value?.filter((item) => item.bank.letter === banks.e.letter && item.block === 'A') || [] },
+          { label: 'EB', block: 'B', runs: runs.value?.filter((item) => item.bank.letter === banks.e.letter && item.block === 'B') || [] },
+          { label: 'EC', block: 'C', runs: runs.value?.filter((item) => item.bank.letter === banks.e.letter && item.block === 'C') || [] },
+          { label: 'ED', block: 'D', runs: runs.value?.filter((item) => item.bank.letter === banks.e.letter && item.block === 'D') || [] },
+        ]
+      },
+      {
+        label: 'Star',
+        printed: 500000,
+        fw: { printed: 500000, pct: 100, catalog: 'F-3005E*' },
+        runs: [
+          { label: 'E*', block: '*', runs: runs.value?.filter((item) => item.bank.letter === banks.e.letter && item.block === '*') || [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.f,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'FA', block: 'A', runs: [] },
+          { label: 'FB', block: 'B', runs: [] },
+          { label: 'FC', block: 'C', runs: [] },
+          { label: 'FD', block: 'D', runs: [] },
+          { label: 'FE', block: 'E', runs: [] },
+          { label: 'FF', block: 'F', runs: [] },
+          { label: 'FG', block: 'G', runs: [] },
+          { label: 'FH', block: 'H', runs: [] },
+          { label: 'FI', block: 'I', runs: [] },
+        ]
+      },
+      {
+        label: 'Star',
+        printed: 10990000,
+        fw: { printed: 10990000, pct: 100, catalog: 'F-3005F*' },
+        runs: [
+          { label: 'F*', block: '*', runs: runs.value?.filter((item) => item.bank.letter === banks.f.letter && item.block === '*') || [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.g,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'GA', block: 'A', runs: [] },
+          { label: 'GB', block: 'B', runs: [] },
+          { label: 'GC', block: 'C', runs: [] },
+          { label: 'GD', block: 'D', runs: [] },
+          { label: 'GE', block: 'E', runs: [] },
+          { label: 'GF', block: 'F', runs: [] },
+        ]
+      },
+      {
+        label: 'Star',
+        printed: 9760000,
+        dc: { printed: 6560000, pct: 67, catalog: 'F-3006G*' },
+        fw: { printed: 3200000, pct: 33, catalog: 'F-3005G*' },
+        runs: [
+          { label: 'G*', block: '*', runs: runs.value?.filter((item) => item.bank.letter === banks.g.letter && item.block === '*') || [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.h,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'HA', block: 'A', runs: [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.i,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'IA', block: 'A', runs: [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.j,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'JA', block: 'A', runs: [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.k,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'KA', block: 'A', runs: [] },
+          { label: 'KB', block: 'B', runs: [] },
+          { label: 'KC', block: 'C', runs: [] },
+        ]
+      },
+    ]
+  },
+  {
+    bank: banks.l,
+    printed: 0,
+    blocks: [
+      {
+        label: 'Regular', printed: 0, runs: [
+          { label: 'LA', block: 'A', runs: [] },
+          { label: 'LB', block: 'B', runs: [] },
+          { label: 'LC', block: 'C', runs: [] },
+          { label: 'LD', block: 'D', runs: [] },
+          { label: 'LE', block: 'E', runs: [] },
+          { label: 'LF', block: 'F', runs: [] },
+          { label: 'LG', block: 'G', runs: [] },
+        ]
+      },
+      {
+        label: 'Star',
+        printed: 4340000,
+        fw: { printed: 4340000, pct: 100, catalog: 'F-3005L*' },
+        runs: [
+          { label: 'L*', block: '*', runs: runs.value?.filter((item) => item.bank.letter === banks.l.letter && item.block === '*') || [] },
+        ]
+      },
+    ]
+  }
 ]
 </script>
