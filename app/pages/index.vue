@@ -3,12 +3,21 @@
     <ColorModeButton />
     <UTable class="hidden lg:block" :columns="columns" :data="data" />
 
-    <UTable class="lg:hidden" :data="bySeries">
-      <template #denominations-cell="{ row }">
+    <UTable class="lg:hidden" :data="[
+      { denom: 1, series: ['2021', '2017-A', '2017', '2013', '2009'] },
+      { denom: 2, series: ['2017-A', '2013', '2009'] },
+      { denom: 5, series: ['2021', '2017-A', '2013', '2009'] },
+      { denom: 10, series: ['2021', '2017-A', '2017', '2013', '2009'] },
+      { denom: 20, series: ['2017-A', '2017', '2013', '2009'] },
+      { denom: 50, series: ['2017-A', '2013', '2009'] },
+      { denom: 100, series: ['2021', '2017-A', '2013', '2009-A', '2009'] },
+    ]">
+      <template #denom-cell="{ row }">${{ row.getValue('denom') }}</template>
+      <template #series-cell="{ row }">
         <ul class="flex flex-wrap gap-2">
-          <li v-for="denom in row.getValue('denominations')">
-            <UButton size="sm" :to="denom.slug || ''" :variant="denom.slug ? 'solid' : 'soft'">
-              ${{ denom.value }}
+          <li v-for="title in row.getValue('series')">
+            <UButton size="sm" variant="soft">
+              {{ title }}
             </UButton>
           </li>
         </ul>
@@ -54,9 +63,9 @@ function buttonGroupList(list: Series[]) {
         UButtonGroup,
         { size: 'sm' },
         [
-          series.dc ? h(UBadge, { variant: 'solid', color: 'info' }, 'DC') : '',
+          series.dc ? h(UBadge, { variant: 'subtle', color: 'info' }, 'DC') : '',
           h(UButton, { to: series.slug || '', variant: series.slug ? 'solid' : 'subtle' }, series.series),
-          series.fw ? h(UBadge, { variant: 'solid', color: 'error' }, 'FW') : '',
+          series.fw ? h(UBadge, { variant: 'subtle', color: 'error' }, 'FW') : '',
         ]
       )
     ))
@@ -123,62 +132,5 @@ const data = ref<Run[]>([
     fifty: [],
     hundred: [{ series: '2017-A', dc: true, fw: true }],
   }
-])
-
-interface Denomination {
-  value: number
-  slug?: string
-}
-
-interface SeriesList {
-  series: string
-  denominations: Denomination[]
-}
-
-const bySeries = ref<SeriesList[]>([
-  {
-    series: '2021', denominations: [
-      { value: 1 }, { value: 5 }, { value: 10 }, { value: 100 }
-    ]
-  },
-  {
-    series: '2017-A', denominations: [
-      { value: 1, slug: '/frn/one' },
-      { value: 2 },
-      { value: 5 },
-      { value: 10 },
-      { value: 20 },
-      { value: 50 },
-      { value: 100 },
-    ]
-  },
-  {
-    series: '2017', denominations: [
-      { value: 1 }, { value: 10 }, { value: 20 }
-    ]
-  },
-  {
-    series: '2013', denominations: [
-      { value: 1 },
-      { value: 2 },
-      { value: 5 },
-      { value: 10 },
-      { value: 20 },
-      { value: 50 },
-      { value: 100 },
-    ]
-  },
-  { series: '2009-A', denominations: [{ value: 100 }] },
-  {
-    series: '2009', denominations: [
-      { value: 1 },
-      { value: 2 },
-      { value: 5 },
-      { value: 10 },
-      { value: 20 },
-      { value: 50 },
-      { value: 100 },
-    ]
-  },
 ])
 </script>

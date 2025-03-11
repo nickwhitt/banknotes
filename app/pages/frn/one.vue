@@ -1,14 +1,11 @@
 <template>
   <UContainer class="mt-8 mb-20">
-    <h1 class="my-8 text-3xl sm:text-4xl font-semibold tracking-tight">
-      $1 Federal Reserve Notes
+    <UBreadcrumb :items="[{ label: 'One Dollar' }, { label: 'Federal Reserve Note' }, { label: '2017SA' }]" />
+    <h1 class="mt-2 mb-8 text-3xl sm:text-4xl font-semibold tracking-tight">
+      Series of 2017-A $1
     </h1>
 
-    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
-      Series of 2017-A
-    </h2>
-
-    <article class="grid md:grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2">
+    <article class="my-6 grid md:grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2">
       <UCard v-for="bank in data" :ui="{ body: 'ps-0 sm:ps-0', header: 'py-2' }">
         <template #header>
           <div class="flex items-center justify-between">
@@ -70,9 +67,9 @@
                       <div class="flex items-center">
                         <p v-if="run.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
                         <p>
-                          {{ new Date(run.year, run.month).toLocaleString('en-us', {
+                          {{ new Date(run.year, run.month - 1).toLocaleString('en-us', {
                             year: 'numeric', month: 'short'
-                          })}}
+                          }) }}
                         </p>
                       </div>
                       <p>{{ run.facility.city }}</p>
@@ -127,7 +124,8 @@ interface Series {
   blocks: SeriesBlock[]
 }
 
-const { data: runs } = await useFetch('/api/bep/one/2017a')
+const { data: series } = await useFetch('/api/bep/s2017a')
+const runs = ref(series.value?.filter((item) => item.denom === 1))
 runs.value?.sort((a, b) => new Date(a.year, a.month).getTime() - new Date(b.year, b.month).getTime())
 
 const data: Series[] = [
@@ -145,7 +143,7 @@ const data: Series[] = [
           {
             label: 'AA',
             block: 'A',
-            runs: runs.value?.filter((item) => item.bank.letter === banks.a.letter && item.block === 'A').sort((a, b) => a.start - b.start) || []
+            runs: runs.value?.filter((item) => item.bank.letter === banks.a.letter && item.block === 'A') || []
           },
           {
             label: 'AB',
