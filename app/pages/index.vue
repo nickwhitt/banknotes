@@ -1,102 +1,111 @@
 <template>
-  <UContainer class="mx-0 xl:px-2">
-    <div class="bg-(--ui-bg)/50 backdrop-blur sticky top-16 lg:top-0 h-10 lg:h-16 flex items-center">
-      <div class="sm:max-md:hidden">
-        <USlideover side="left" :ui="{ content: 'divide-y-0 max-w-sm', overlay: 'bg-(--ui-bg-accented)/75' }">
-          <UButton icon="i-heroicons-list-bullet" color="neutral" variant="link" size="sm" />
-          <template #body>Table of Contents</template>
-        </USlideover>
-      </div>
-      <UBreadcrumb :items="[{ label: 'One Dollar' }, { label: 'Federal Reserve Note' }, { label: '2017SA' }]" />
-    </div>
+  <div>
+    <PageHeader :crumbs="[{ label: 'One Dollar' }, { label: 'Federal Reserve Note' }, { label: '2017SA' }]" />
+    <UContainer class="mx-0 lg:px-2 2xl:px-8">
 
-    <h1 class="mb-8 text-3xl sm:text-4xl font-semibold tracking-tight">
-      Series of 2017-A $1
-    </h1>
+      <h1 class="my-8 text-3xl sm:text-4xl font-semibold tracking-tight">
+        Series of 2017-A $1
+      </h1>
 
-    <article class="my-6 grid md:grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2 sm:max-md:pr-60">
-      <UCard v-for="bank in data" :ui="{ body: 'ps-0 sm:ps-0', header: 'py-2' }">
-        <template #header>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <p v-if="bank.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
-              <h3 class="text-lg font-semibold tracking-tight">{{ bank.bank.city }}</h3>
-            </div>
-            <p>{{ formatNumber(bank.printed) }}</p>
-            <div class="flex items-center h-12 overflow-hidden">
-              <NuxtImg :src="bank.bank.seal" sizes="98px" class="-mt-4" />
-            </div>
-          </div>
-        </template>
-
-        <UTabs variant="pill" :items="bank.blocks" :ui="{ list: 'ms-4 sm:ms-6' }">
-          <template #content="{ item }">
-            <div class="ps-4 sm:ps-6 space-y-2">
-              <div class="grid grid-cols-4 gap-2 items-end">
-                <div class="col-span-3 flex items-end justify-between">
-                  <div>
-                    <div class="flex items-center">
-                      <p v-if="item.dc?.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
-                      <p class="text-sm/6">{{ item.dc?.catalog }}</p>
-                    </div>
-                    <h4 class="font-semibold tracking-tight">{{ dc.city }}</h4>
-                  </div>
-                  <div class="text-right">
-                    <div class="flex items-center justify-end">
-                      <p class="text-sm/6">{{ item.fw?.catalog }}</p>
-                      <p v-if="item.fw?.owned" class="-me-3.5 ms-1 text-sm text-(--ui-success)">√</p>
-                    </div>
-                    <h4 class="font-semibold tracking-tight">{{ fw.city }}</h4>
-                  </div>
-                </div>
-                <h4 class="text-right font-semibold tracking-tight">Printed</h4>
+      <article class="my-6 grid md:grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2 2xl:gap-x-4">
+        <UCard v-for="bank in data" :ui="{ body: 'ps-0 sm:ps-0', header: 'py-2' }">
+          <template #header>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <p v-if="bank.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+                <h3 class="text-lg font-semibold tracking-tight">{{ bank.bank.city }}</h3>
               </div>
-              <div class="grid grid-cols-4 gap-2 items-center text-sm/6">
-                <div class="col-span-3">
-                  <div class="flex items-center justify-between">
-                    <p>{{ formatNumber(item.dc?.printed) }}</p>
-                    <p>{{ formatNumber(item.fw?.printed) }}</p>
-                  </div>
-                  <UProgress color="info" size="sm" :model-value="item.dc?.pct || 0"
-                    :ui="{ base: 'bg-(--ui-error)' }" />
-                  <div class="flex items-center justify-between">
-                    <p>{{ item.dc?.pct || 0 }}%</p>
-                    <p>{{ item.fw?.pct || 0 }}%</p>
-                  </div>
-                </div>
-                <p class="text-right">{{ formatNumber(item.printed) }}</p>
+              <p>{{ formatNumber(bank.printed) }}</p>
+              <div class="flex items-center h-12 overflow-hidden">
+                <NuxtImg :src="bank.bank.seal" sizes="98px" class="-mt-4" />
               </div>
             </div>
-            <h4 class="my-4 ps-4 sm:ps-6 font-semibold tracking-tight">Blocks</h4>
-            <UTabs orientation="vertical" variant="link" :items="item.runs" class="mt-4 items-start">
-              <template #content="{ item }">
-                <ol class="text-sm/6 divide-y divide-(--ui-border)">
-                  <li v-for="run in item.runs" class="not-first:pt-2 not-last:pb-2 flex items-center justify-between">
+          </template>
+
+          <UTabs variant="pill" :items="bank.blocks" :ui="{ list: 'ms-4 sm:ms-6' }">
+            <template #content="{ item }">
+              <div class="ps-4 sm:ps-6 space-y-2">
+                <div class="grid grid-cols-4 gap-2 items-end">
+                  <div class="col-span-3 flex items-end justify-between">
                     <div>
                       <div class="flex items-center">
-                        <p v-if="run.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
-                        <p>
-                          {{ new Date(run.year, run.month - 1).toLocaleString('en-us', {
-                            year: 'numeric', month: 'short'
-                          }) }}
-                        </p>
+                        <p v-if="item.dc?.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+                        <p class="text-sm/6">{{ item.dc?.catalog }}</p>
                       </div>
-                      <p>{{ run.facility.city }}</p>
+                      <h4 class="font-semibold tracking-tight">{{ dc.city }}</h4>
                     </div>
-                    <div class="font-mono">
-                      <p>{{ formatSerialNumber(run.start, item.block, bank.bank.letter) }}</p>
-                      <p>{{ formatSerialNumber(run.end, item.block, bank.bank.letter) }}</p>
+                    <div class="text-right">
+                      <div class="flex items-center justify-end">
+                        <p class="text-sm/6">{{ item.fw?.catalog }}</p>
+                        <p v-if="item.fw?.owned" class="-me-3.5 ms-1 text-sm text-(--ui-success)">√</p>
+                      </div>
+                      <h4 class="font-semibold tracking-tight">{{ fw.city }}</h4>
                     </div>
-                    <p>{{ formatNumber(run.end - run.start + 1) }}</p>
-                  </li>
-                </ol>
-              </template>
-            </UTabs>
-          </template>
-        </UTabs>
-      </UCard>
-    </article>
-  </UContainer>
+                  </div>
+                  <h4 class="text-right font-semibold tracking-tight">Printed</h4>
+                </div>
+                <div class="grid grid-cols-4 gap-2 items-center text-sm/6">
+                  <div class="col-span-3">
+                    <div class="flex items-center justify-between">
+                      <p>{{ formatNumber(item.dc?.printed) }}</p>
+                      <p>{{ formatNumber(item.fw?.printed) }}</p>
+                    </div>
+                    <UProgress color="info" size="sm" :model-value="item.dc?.pct || 0"
+                      :ui="{ base: 'bg-(--ui-error)' }" />
+                    <div class="flex items-center justify-between">
+                      <p>{{ item.dc?.pct || 0 }}%</p>
+                      <p>{{ item.fw?.pct || 0 }}%</p>
+                    </div>
+                  </div>
+                  <p class="text-right">{{ formatNumber(item.printed) }}</p>
+                </div>
+              </div>
+              <h4 class="my-4 ps-4 sm:ps-6 font-semibold tracking-tight">Blocks</h4>
+              <UTabs orientation="vertical" variant="link" :items="item.runs" class="mt-4 items-start">
+                <template #content="{ item }">
+                  <ol class="text-sm/6 divide-y divide-(--ui-border)">
+                    <li v-for="run in item.runs" class="not-first:pt-2 not-last:pb-2 flex items-center justify-between">
+                      <div>
+                        <div class="flex items-center">
+                          <p v-if="run.owned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+                          <p>
+                            {{ new Date(run.year, run.month - 1).toLocaleString('en-us', {
+                              year: 'numeric', month: 'short'
+                            }) }}
+                          </p>
+                        </div>
+                        <p>{{ run.facility.city }}</p>
+                      </div>
+                      <div class="font-mono">
+                        <p>{{ formatSerialNumber(run.start, item.block, bank.bank.letter) }}</p>
+                        <p>{{ formatSerialNumber(run.end, item.block, bank.bank.letter) }}</p>
+                      </div>
+                      <p>{{ formatNumber(run.end - run.start + 1) }}</p>
+                    </li>
+                  </ol>
+                </template>
+              </UTabs>
+            </template>
+          </UTabs>
+        </UCard>
+      </article>
+
+      <footer class="my-5 py-2 border-t border-(--ui-border)">
+        <ul class="text-sm text-pretty text-center lg:flex lg:justify-between">
+          <li>
+            Copyright © 2025
+            <ULink to="/" active>banknotes.money</ULink>
+          </li>
+          <li>
+            Content licensed under
+            <ULink to="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" active>
+              CC BY-SA 4.0
+            </ULink>
+          </li>
+        </ul>
+      </footer>
+    </UContainer>
+  </div>
 </template>
 
 <script setup lang="ts">
