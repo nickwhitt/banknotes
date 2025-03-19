@@ -5,7 +5,15 @@ import { s2017a } from "~~/types/Series"
 
 export default defineEventHandler(() => {
   return [
-    { year: 2025, month: 1, facility: fw, denom: 2, series: s2017a, bank: banks.l, block: 'C', start: 12800001, end: 38400000 },
+    { year: 2025, month: 1,  facility: fw, denom: 2, series: s2017a, bank: banks.l, block: 'C', start: 12800001, end: 38400000 },
+    { year: 2024, month: 11, facility: fw, denom: 2, series: s2017a, bank: banks.l, block: 'C', start: 1, end: 12800000 },
+    { year: 2024, month: 11, facility: fw, denom: 2, series: s2017a, bank: banks.l, block: 'B', start: 76800001, end: 96000000 },
+    { year: 2024, month: 10, facility: fw, denom: 2, series: s2017a, bank: banks.i, block: 'A', start: 6400001, end: 32000000 },
+    { year: 2024, month: 10, facility: fw, denom: 2, series: s2017a, bank: banks.k, block: 'A', start: 12800001, end: 38400000 },
+    { year: 2024, month: 10, facility: fw, denom: 2, series: s2017a, bank: banks.i, block: '*', start: 1, end: 160000, sheets: true },
+    { year: 2024, month: 9,  facility: fw, denom: 2, series: s2017a, bank: banks.f, block: 'A', start: 1, end: 32000000 },
+    { year: 2024, month: 9,  facility: fw, denom: 2, series: s2017a, bank: banks.g, block: 'A', start: 76800001, end: 96000000 },
+    { year: 2024, month: 9,  facility: fw, denom: 2, series: s2017a, bank: banks.g, block: 'B', start: 1, end: 12800000 },
 
     { year: 2019, month: 12, facility: dc, denom: 1, series: s2017a, bank: banks.a, block: 'A', start: 1, end: 12800000 },
     { year: 2019, month: 12, facility: dc, denom: 1, series: s2017a, bank: banks.b, block: 'A', start: 1, end: 25600000 },
