@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <p v-if="fwOwned || dcOwned" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
+          <p v-if="runs.some(isOwned)" class="-ml-3.5 me-1 text-sm text-(--ui-success)">√</p>
           <h3 class="text-lg font-semibold tracking-tight">{{ bank.city }}</h3>
         </div>
         <p>{{ formatNumber(totalRuns.printed) }}</p>
@@ -14,13 +14,23 @@
     </template>
 
     <UTabs variant="pill" :ui="{ list: 'ms-4 sm:ms-6' }" :items="[
-      ...(regular.length ? [{ label: 'Regular', runs: regular }] : []),
-      ...(star.length ? [{ label: 'Star', runs: star }] : []),
+      ...(regular.length ? [{
+        label: 'Regular',
+        runs: regular,
+        fw: regular.some(isFw) ? catalog?.fw + bank.letter : '',
+        dc: regular.some(isDc) ? catalog?.dc + bank.letter : '',
+      }] : []),
+      ...(star.length ? [{
+        label: 'Star',
+        runs: star,
+        fw: star.some(isFw) ? catalog?.fw + bank.letter + '*' : '',
+        dc: star.some(isDc) ? catalog?.fw + bank.letter + '*' : '',
+      }] : []),
     ]">
       <template #content="{ item }">
-        <PrintRunsStats :runs="new PrintRuns(item.runs)" fw-catalog="F-4321A" dc-catalog="F-1234A" :fw-owned="fwOwned"
-          :dc-owned="dcOwned" />
-        <BankBlocksList :bank="bank" :runs="item.runs" />
+        <PrintRunsStats :runs="new PrintRuns(item.runs)" :fw-catalog="item.fw" :dc-catalog="item.dc"
+          :fw-owned="item.runs.filter(isFw).some(isOwned)" :dc-owned="item.runs.filter(isDc).some(isOwned)" />
+        <BankBlocksList :series="series" :bank="bank" :runs="item.runs" />
       </template>
     </UTabs>
 
@@ -30,15 +40,14 @@
 <script setup lang="ts">
 import formatNumber from '~~/utils/formatNumber'
 import type { Bank } from '~~/types/Bank'
-import type { Run } from '~~/types/Run'
+import { type Run, isDc, isFw, isOwned, isStar, notStar } from '~~/types/Run'
 import { PrintRuns } from './PrintRunsStats.vue'
+import type { Series } from '~~/types/Series'
+import type { Catalog } from '~~/types/Catalog'
 
-const props = defineProps<{ bank: Bank, runs: Run[] }>()
+const props = defineProps<{ series?: Series, bank: Bank, catalog?: Catalog, runs: Run[] }>()
 const totalRuns = new PrintRuns(props.runs)
 
-const regular = props.runs.filter((run) => run.block !== '*')
-const star = props.runs.filter((run) => run.block === '*')
-
-const fwOwned = props.runs.filter((run) => run.facility.code === 'fw').some((run) => run.owned)
-const dcOwned = props.runs.filter((run) => run.facility.code === 'dc').some((run) => run.owned)
+const regular = props.runs.filter(notStar)
+const star = props.runs.filter(isStar)
 </script>

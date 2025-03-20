@@ -54,7 +54,7 @@ const props = defineProps<Props>()
 </script>
 
 <script lang="ts">
-import type { Run } from '~~/types/Run'
+import { isDc, type Run } from '~~/types/Run'
 
 export class PrintRuns {
   printed: number = 0
@@ -63,7 +63,7 @@ export class PrintRuns {
 
   constructor(runs: Run[]) {
     this.printed = runs.reduce((printed, run) => printed + run.end - run.start + 1, 0)
-    this.dc = runs.filter((run) => run.facility.code === 'dc').reduce((printed, run) => printed + run.end - run.start + 1, 0)
+    this.dc = runs.filter(isDc).reduce((printed, run) => printed + run.end - run.start + 1, 0)
     this.fw = this.printed - this.dc
   }
 

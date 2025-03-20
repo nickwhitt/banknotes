@@ -15,3 +15,23 @@ export type Run = {
   sheets?: boolean
   owned?: boolean
 }
+
+export function isFw(run: Run) {
+  return run.facility.code === 'fw'
+}
+
+export function isDc(run: Run) {
+  return run.facility.code === 'dc'
+}
+
+export function isStar(run: Run) {
+  return run.block === '*'
+}
+
+export function notStar(run:Run) {
+  return !isStar(run)
+}
+
+export function isOwned(run: Run) {
+  return run.owned === true
+}
