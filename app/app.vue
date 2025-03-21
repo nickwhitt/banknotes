@@ -32,7 +32,7 @@
       'bg-(--ui-bg)/50', 'backdrop-blur', 'sticky', 'top-0', 'z-40', 'h-16', 'flex', 'lg:hidden',
       'items-center', 'justify-between', 'p-4', 'sm:px-6', 'shadow-xs', 'border-b', 'border-(--ui-border)'
     ]">
-      <USlideover title="Menu" side="left">
+      <USlideover v-model:open="menuOpen" title="Menu" side="left">
         <UButton icon="i-heroicons-bars-3" color="neutral" variant="link" />
         <template #body>
           <UNavigationMenu orientation="vertical" :items="frnNavItems" highlight :ui="{
@@ -53,6 +53,12 @@
 
 <script setup lang="ts">
 import { type NavigationMenuItem } from '@nuxt/ui'
+
+const route = useRoute()
+const menuOpen = ref(false)
+watch(() => route.fullPath, () => {
+  menuOpen.value = false
+})
 
 const frnNavItems = ref<NavigationMenuItem[]>([
   { label: 'Federal Reserve Notes', type: 'label' },
