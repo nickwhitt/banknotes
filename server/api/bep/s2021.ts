@@ -34,5 +34,11 @@ export default defineEventHandler(() => {
     { year: 2024, month: 9,  facility: fw, denom: 1, series: s2021, bank: banks.k, block: 'C', start: 51200001, end: 96000000 },
     { year: 2024, month: 9,  facility: fw, denom: 1, series: s2021, bank: banks.l, block: 'G', start: 1, end: 12800000 },
     { year: 2024, month: 9,  facility: fw, denom: 1, series: s2021, bank: banks.l, block: 'F', start: 32000001, end: 96000000 },
+
+    { year: 2024, month: 8,  facility: fw, denom: 1, series: s2021, bank: banks.g, block: 'D', start: 1, end: 51200000 },
+    { year: 2024, month: 8,  facility: fw, denom: 1, series: s2021, bank: banks.g, block: 'C', start: 25600001, end: 96000000 },
+    { year: 2024, month: 8,  facility: fw, denom: 1, series: s2021, bank: banks.k, block: 'C', start: 1, end: 51200000 },
+    { year: 2024, month: 8,  facility: fw, denom: 1, series: s2021, bank: banks.k, block: '*', start: 12800001, end: 13050000 },
+    { year: 2024, month: 8,  facility: fw, denom: 1, series: s2021, bank: banks.k, block: '*', start: 16000001, end: 19200000 },
   ] as Run[]
 })
