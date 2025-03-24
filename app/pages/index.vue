@@ -25,10 +25,10 @@
       In 1861, Congress authorized the printing of non-interest-bearing notes, payable on demand to the holder in gold
       coin. These "Demand Notes" were offered as payment for debts of the government in the form of a "promise to pay
       bearer" at a later time; making Demand Notes freely transferable from person-to-person. The following year,
-      Congress officially designated outstanding Demand Notes legal tender and authorized United States Notes to be
-      printed instead of new Demand Notes. Paper fiat currency had been adopted, backed by the faith of reserve deposits
-      of silver and gold in treasury vaults. All U.S. currency issued since 1861 remains valid and redemable at face
-      value.
+      Congress officially designated outstanding Demand Notes legal tender and authorized a new type of United States
+      Notes to be printed instead of new Demand Notes. Paper fiat currency had been adopted, backed by the faith of
+      reserve deposits of silver and gold in treasury vaults. All U.S. currency issued since 1861 remains valid and
+      redemable at face value.
     </p>
 
     <h2 class="my-6 text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -45,6 +45,17 @@
       has remained largely the same--a layered, multi-step production to create the final note; comprising offset
       ink-based printing of colored designs, intaglio pressing of green backs followed by faces in black, and colored
       overprinting of face elements (including serial numbers and seals).
+    </p>
+
+    <p class="text-base/6 my-4">
+      Unlike coins which are produced with the issuing year as part of the design, banknotes are printed in multi-year
+      series which are named for the first production year. For example, Series 1993 notes were printed April 1994
+      through May 1997 according to production figures released by the BEP. Without an accompanying production report,
+      it is impossible to tell the month or year a given note was printed. A new series is introduced with a major
+      update to the note type, such as an image, color, or paper redesign; a suffix letter will be added or incremented
+      with minor note changes, including new signatures or production processes. Until recently, there were multiple
+      types of notes in circulation: United States (or Legal Tender) Notes, National and Federal Reserve Bank Notes,
+      Silver Certificates, and even Gold Certificates; in addition to the familiar Federal Reserve Notes.
     </p>
 
     <p class="text-base/6 my-4">
@@ -93,6 +104,22 @@
       Serial Numbers
     </h2>
 
+    <p class="text-base/6 my-4">
+      Serial numbers are required to be on all notes issued by the BEP, both as a way to prevent counterfeiting as well
+      as to help the Federal Reserve track the notes in circulation. Each note of the same type, denomination, and
+      series has a unique serial number following a specific formula. In the case of Federal Reserve Notes, the
+      eight-digit serial number begins and ends with a letter, such as <span class="font-mono">A01234567A</span>. The
+      letter prefix indicates which Federal Reserve Bank issued the note, while the letter suffix advances for every
+      100,000,000 notes printed; though neither the letters <span class="font-mono">O</span> or
+      <span class="font-mono">Z</span> are used. Sometimes a sheet must be removed from the finished stack due to a
+      print error; it will be replaced by a "star" sheet--one where the letter suffix is replaced with a star, like
+      <span class="font-mono">A01234567*</span>. Beginning with Series 1996, a
+      <ULink active @click="seriesOpen = true">series letter</ULink> has been prepended to the serial number for all
+      denomination of five-dollars and higher, such as <span class="font-mono">QA01234567A</span>.
+    </p>
+
+    <p></p>
+
     <UModal v-model:open="frbOpen" title="Federal Reserve Banks">
       <template #body>
         <UTable :columns="frbColumns" :data="Object.values(banks)" />
@@ -106,17 +133,8 @@
             One column of four notes with plate positions A through D.
           </p>
           <ol class="table table-fixed w-16 border-collapse">
-            <li class="table-row text-center">
-              <p class="table-cell border">A</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">B</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">C</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">D</p>
+            <li v-for="cell in 'ABCD'.split('')" class="table-row text-center">
+              <p class="table-cell border">{{ cell }}</p>
             </li>
           </ol>
         </div>
@@ -130,21 +148,10 @@
             Two columns of four notes with plate positions A through H.
           </p>
           <ol class="table table-fixed w-32 border-collapse">
-            <li class="table-row text-center">
-              <p class="table-cell border">A</p>
-              <p class="table-cell border">E</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">B</p>
-              <p class="table-cell border">F</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">C</p>
-              <p class="table-cell border">G</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">D</p>
-              <p class="table-cell border">H</p>
+            <li class="table-row text-center" v-for="cells in [
+              ['A', 'E'], ['B', 'F'], ['C', 'G'], ['D', 'H']
+            ]">
+              <p v-for="cell in cells" class="table-cell border">{{ cell }}</p>
             </li>
           </ol>
         </div>
@@ -158,29 +165,10 @@
             Two columns of six notes with plate positions A through L.
           </p>
           <ol class="table table-fixed w-32 border-collapse">
-            <li class="table-row text-center">
-              <p class="table-cell border">A</p>
-              <p class="table-cell border">G</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">B</p>
-              <p class="table-cell border">H</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">C</p>
-              <p class="table-cell border">I</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">D</p>
-              <p class="table-cell border">J</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">E</p>
-              <p class="table-cell border">K</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">F</p>
-              <p class="table-cell border">L</p>
+            <li class="table-row text-center" v-for="cells in [
+              ['A', 'G'], ['B', 'H'], ['C', 'I'], ['D', 'J'], ['E', 'K'], ['F', 'L']
+            ]">
+              <p v-for="cell in cells" class="table-cell border">{{ cell }}</p>
             </li>
           </ol>
         </div>
@@ -194,35 +182,10 @@
             Three columns of six notes with plate positions A through R.
           </p>
           <ol class="table table-fixed w-48 border-collapse">
-            <li class="table-row text-center">
-              <p class="table-cell border">A</p>
-              <p class="table-cell border">G</p>
-              <p class="table-cell border">M</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">B</p>
-              <p class="table-cell border">H</p>
-              <p class="table-cell border">N</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">C</p>
-              <p class="table-cell border">I</p>
-              <p class="table-cell border">O</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">D</p>
-              <p class="table-cell border">J</p>
-              <p class="table-cell border">P</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">E</p>
-              <p class="table-cell border">K</p>
-              <p class="table-cell border">Q</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">F</p>
-              <p class="table-cell border">L</p>
-              <p class="table-cell border">R</p>
+            <li class="table-row text-center" v-for="cells in [
+              ['A', 'G', 'M'], ['B', 'H', 'N'], ['C', 'I', 'O'], ['D', 'J', 'P'], ['E', 'K', 'Q'], ['F', 'L', 'R']
+            ]">
+              <p v-for="cell in cells" class="table-cell border">{{ cell }}</p>
             </li>
           </ol>
         </div>
@@ -237,76 +200,9 @@
             through H. Plate position is a combination of column-row-letter and quandrant-number.
           </p>
           <div class="flex flex-wrap gap-1 justify-center max-w-50">
-            <ol class="table table-fixed w-24 border-collapse">
-              <li class="table-row text-center">
-                <p class="table-cell border">A1</p>
-                <p class="table-cell border">E1</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">B1</p>
-                <p class="table-cell border">F1</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">C1</p>
-                <p class="table-cell border">G1</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">D1</p>
-                <p class="table-cell border">H1</p>
-              </li>
-            </ol>
-            <ol class="table table-fixed w-24 border-collapse">
-              <li class="table-row text-center">
-                <p class="table-cell border">A3</p>
-                <p class="table-cell border">E3</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">B3</p>
-                <p class="table-cell border">F3</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">C3</p>
-                <p class="table-cell border">G3</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">D3</p>
-                <p class="table-cell border">H3</p>
-              </li>
-            </ol>
-            <ol class="table table-fixed w-24 border-collapse">
-              <li class="table-row text-center">
-                <p class="table-cell border">A2</p>
-                <p class="table-cell border">E2</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">B2</p>
-                <p class="table-cell border">F2</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">C2</p>
-                <p class="table-cell border">G2</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">D2</p>
-                <p class="table-cell border">H2</p>
-              </li>
-            </ol>
-            <ol class="table table-fixed w-24 border-collapse">
-              <li class="table-row text-center">
-                <p class="table-cell border">A4</p>
-                <p class="table-cell border">E4</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">B4</p>
-                <p class="table-cell border">F4</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">C4</p>
-                <p class="table-cell border">G4</p>
-              </li>
-              <li class="table-row text-center">
-                <p class="table-cell border">D4</p>
-                <p class="table-cell border">H4</p>
+            <ol v-for="quad in [1, 3, 2, 4]" class="table table-fixed w-24 border-collapse">
+              <li class="table-row text-center" v-for="cells in [['A', 'E'], ['B', 'F'], ['C', 'G'], ['D', 'H']]">
+                <p v-for="cell in cells" class="table-cell border">{{ cell }}{{ quad }}</p>
               </li>
             </ol>
           </div>
@@ -322,78 +218,25 @@
             system of row letter by column number.
           </p>
           <ol class="sm:col-span-2 table table-fixed w-60 border-collapse">
-            <li class="table-row text-center">
-              <p class="table-cell border">A1</p>
-              <p class="table-cell border">A2</p>
-              <p class="table-cell border">A3</p>
-              <p class="table-cell border">A4</p>
-              <p class="table-cell border">A5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">B1</p>
-              <p class="table-cell border">B2</p>
-              <p class="table-cell border">B3</p>
-              <p class="table-cell border">B4</p>
-              <p class="table-cell border">B5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">C1</p>
-              <p class="table-cell border">C2</p>
-              <p class="table-cell border">C3</p>
-              <p class="table-cell border">C4</p>
-              <p class="table-cell border">C5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">D1</p>
-              <p class="table-cell border">D2</p>
-              <p class="table-cell border">D3</p>
-              <p class="table-cell border">D4</p>
-              <p class="table-cell border">D5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">E1</p>
-              <p class="table-cell border">E2</p>
-              <p class="table-cell border">E3</p>
-              <p class="table-cell border">E4</p>
-              <p class="table-cell border">E5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">F1</p>
-              <p class="table-cell border">F2</p>
-              <p class="table-cell border">F3</p>
-              <p class="table-cell border">F4</p>
-              <p class="table-cell border">F5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">G1</p>
-              <p class="table-cell border">G2</p>
-              <p class="table-cell border">G3</p>
-              <p class="table-cell border">G4</p>
-              <p class="table-cell border">G5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">H1</p>
-              <p class="table-cell border">H2</p>
-              <p class="table-cell border">H3</p>
-              <p class="table-cell border">H4</p>
-              <p class="table-cell border">H5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">I1</p>
-              <p class="table-cell border">I2</p>
-              <p class="table-cell border">I3</p>
-              <p class="table-cell border">I4</p>
-              <p class="table-cell border">I5</p>
-            </li>
-            <li class="table-row text-center">
-              <p class="table-cell border">J1</p>
-              <p class="table-cell border">J2</p>
-              <p class="table-cell border">J3</p>
-              <p class="table-cell border">J4</p>
-              <p class="table-cell border">J5</p>
+            <li v-for="row in 'ABCDEFGHIJ'.split('')" class="table-row text-center">
+              <p v-for="col in [1, 2, 3, 4, 5]" class="table-cell border">{{ row }}{{ col }}</p>
             </li>
           </ol>
         </div>
+      </template>
+    </UModal>
+
+    <UModal v-model:open="seriesOpen" title="Series Year and Prefix Letter">
+      <template #body>
+        <UTable :data="seriesPrefixes">
+          <template #denominations-cell="{ row }">
+            <ul class="flex flex-wrap gap-2">
+              <li v-for="denom in row.original.denominations">
+                ${{ denom }}
+              </li>
+            </ul>
+          </template>
+        </UTable>
       </template>
     </UModal>
 
@@ -406,6 +249,8 @@ import type { TableColumn } from '@nuxt/ui'
 import { banks, type Bank } from '~~/types/Bank'
 
 const frbOpen = ref(false)
+const seriesOpen = ref(false)
+
 const fourByOpen = ref(false)
 const eightByOpen = ref(false)
 const twelveByOpen = ref(false)
@@ -417,5 +262,24 @@ const frbColumns: TableColumn<Bank>[] = [
   { accessorKey: 'city', header: 'Bank', cell: ({ row }) => row.original.city + ', ' + row.original.state },
   { accessorKey: 'letter', header: 'Letter' },
   { accessorKey: 'number', header: 'Number' },
+]
+
+const seriesPrefixes = [
+  { series: '1996', prefix: 'A', denominations: [20, 50, 100] },
+  { series: '1999', prefix: 'B', denominations: [5, 10, 20, 100] },
+  { series: '2001', prefix: 'C', denominations: [5, 10, 20, 50, 100] },
+  { series: '2003', prefix: 'D', denominations: [10, 100] },
+  { series: '2004', prefix: 'E', denominations: [20, 50] },
+  { series: '2003-A', prefix: 'F', denominations: [5, 100] },
+  { series: '2004-A', prefix: 'G', denominations: [10, 20, 50] },
+  { series: '2006', prefix: 'H', denominations: [5, 100] },
+  { series: '2006', prefix: 'I', denominations: [5, 10, 20, 50] },
+  { series: '2009', prefix: 'J', denominations: [10, 20, 50, 100] },
+  { series: '2006-A', prefix: 'K', denominations: [100] },
+  { series: '2009-A', prefix: 'L', denominations: [100] },
+  { series: '2013', prefix: 'M', denominations: [5, 10, 20, 50, 100] },
+  { series: '2017', prefix: 'N', denominations: [10, 20] },
+  { series: '2017-A', prefix: 'P', denominations: [5, 10, 20, 50, 100] },
+  { series: '2021', prefix: 'Q', denominations: [5] },
 ]
 </script>
