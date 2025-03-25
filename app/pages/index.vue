@@ -10,7 +10,7 @@
       unubtrousive and easily ignored.
     </p>
 
-    <h2 class="my-6 text-2xl sm:text-3xl font-semibold tracking-tight">
+    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
       Legal Tender
     </h2>
 
@@ -22,16 +22,16 @@
       government bonds; but lacked the time it would take to convert these notes into hard coin.
     </p>
     <p class="text-base/6 my-4">
-      In 1861, Congress authorized the printing of non-interest-bearing notes, payable on demand to the holder in gold
-      coin. These "Demand Notes" were offered as payment for debts of the government in the form of a "promise to pay
-      bearer" at a later time; making Demand Notes freely transferable from person-to-person. The following year,
+      In 1861, Congress authorized the printing of non-interest-bearing notes, payable on demand to the holder in silver
+      or gold coin. These "Demand Notes" were offered as payment for debts of the government in the form of a "promise
+      to pay bearer" at a later time; making Demand Notes freely transferable from person-to-person. The following year,
       Congress officially designated outstanding Demand Notes legal tender and authorized a new type of United States
       Notes to be printed instead of new Demand Notes. Paper fiat currency had been adopted, backed by the faith of
       reserve deposits of silver and gold in treasury vaults. All U.S. currency issued since 1861 remains valid and
       redemable at face value.
     </p>
 
-    <h2 class="my-6 text-2xl sm:text-3xl font-semibold tracking-tight">
+    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
       Bureau of Engraving and Printing
     </h2>
 
@@ -49,7 +49,7 @@
 
     <p class="text-base/6 my-4">
       Unlike coins which are produced with the issuing year as part of the design, banknotes are printed in multi-year
-      series which are named for the first production year. For example, Series 1993 notes were printed April 1994
+      series which are named for the authorization year. For example, Series 1993 notes were printed April 1994
       through May 1997 according to production figures released by the BEP. Without an accompanying production report,
       it is impossible to tell the month or year a given note was printed. A new series is introduced with a major
       update to the note type, such as an image, color, or paper redesign; a suffix letter will be added or incremented
@@ -59,66 +59,88 @@
     </p>
 
     <p class="text-base/6 my-4">
-      Notes are printed multiple to a sheet through powered presses operating at high speed and pressure. Each note
-      indicates a plate position--either a letter or a letter-number combination to show its original position on a
-      sheet. Initially printed
-      <ULink active @click="fourByOpen = true">four per sheet</ULink>, new presses were introduced in 1918 accepting
-      sheets large enough to print
+      Notes are printed by powered presses operating at high speed and pressure. A metalic plate is compressed into a
+      single sheet, transferring the etched image of multiple notes deep into the paper. Each image on the face plate is
+      engraved with a letter or letter-number identifier to indicate the plate position for the resulting note. A unique
+      plate number on both the face and the back of the note identify both plates used to produce the note. Some notes
+      have been identified with mismatched face-back plate numbers from differing series, presses, or print runs. These
+      "mules" are sought after by specialized collectors.
+    </p>
+
+    <p class="text-base/6 my-4">
+      Initially printed
+      <ULink active @click="fourByOpen = true">four per sheet</ULink>, new presses were introduced in 1918 with plates
+      large enough to print
       <ULink active @click="eightByOpen = true">eight notes per sheet</ULink>. In 1929, federal currency was reduced in
       size by 30%, allowing
       <ULink active @click="twelveByOpen = true">twelve "small" notes</ULink> to be printed on the same size sheet as
-      eight "large" notes. Beginning in 1952, new technologies and processes were introduced to prevent distortion of
-      notes during the intaglio wetting and drying process, allowing for
+      eight "large" notes. Beginning in 1952, new technologies were introduced to prevent distortion of notes during the
+      intaglio wetting and drying process, allowing for
       <ULink active @click="eighteenByOpen = true">18-subject sheets</ULink> to be used. By 1957, the distortion was
-      completely eliminated using rotary presses, and
-      <ULink active @click="thirtyTwoByOpen = true">32-subject sheets</ULink> were standardized for all presses. Most
-      recently,
+      completely eliminated, and
+      <ULink active @click="thirtyTwoByOpen = true">32-subject sheets</ULink> were standardized for all denominations.
+      Most recently,
       <ULink active @click="fiftyByOpen = true">50-subject sheets</ULink> were introduced in 2014.
     </p>
 
     <p class="text-base/6 my-4">
-      Finished sheets are stacked in batches of 100, then precisely cut into single-note stacks. Each stack of 100 notes
-      has been printed such that the serial numbers are already in sequential order. This means that the notes on a
-      single sheet do not have sequential serial numbers, but are instead skip-ordered based on the size of the print
-      run itself. For example, if a print run consists of 40,000 sheets, serial numbers of each note on a single sheet
-      would increment by 40,000 per plate position. Additionally, each stacked group of sequentially numbered notes will
-      have the same plate position.
+      Finished sheets are stacked in batches, then precisely cut into single-note stacks. Each stack of notes has been
+      printed such that the serial numbers are already in sequential order. This means that the notes on a single sheet
+      do not have sequential serial numbers, but are instead skip-ordered based on the size of the print run itself. For
+      example, if a print run consists of 20,000 sheets, serial numbers of each note on a single sheet would increment
+      by 20,000 per plate position. As such, each stacked group of sequentially numbered notes will have the same plate
+      position.
     </p>
 
-    <h2 class="my-6 text-2xl sm:text-3xl font-semibold tracking-tight">
+    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
+      Western Facility
+    </h2>
+
+    <p class="text-base/6 my-4">
+      With the BEP running out of space in their Washington, D.C. headquarters, the decision was made to open a "Western
+      Facility" in Fort Worth, Texas. Beginning production in 1990, this was the first federal facility to print
+      currency outside of the seat of government. Similar to coins produced at branches of the U.S. Mint, notes printed
+      at the Western Facility have a facility mark of <span class="font-mono">FW</span> next to the face plate number.
+    </p>
+
+    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
       Federal Reserve
     </h2>
 
     <p class="text-base/6 my-4">
       The Federal Reserve System is a central banking authority created by the Federal Reserve Act of 1913 to monitor
-      and regulate U.S. regional banks. It was created by Congress to avoid financial crises of the federal monetary
-      system, such as the banking Panic of 1907; and is proportioned into twelve regional districts each headed up by a
-      Federal Reserve Bank. Among other responsibilities, each Federal Reserve Bank is tasked with issuing Federal
-      Reserve Notes to private banks within its district to facilitate commerce transactions. All Federal Reserve Notes
-      bear an
-      <ULink active @click="frbOpen = true">identifying mark</ULink> to indicate which Federal Reserve Bank issued the
-      note via one of its constituent member banks.
+      and regulate U.S. regional banks. It is proportioned into twelve regional districts each headed up by a Federal
+      Reserve Bank. Created by Congress to avoid financial crises of the federal monetary system, such as the banking
+      Panic of 1907, each Federal Reserve Bank is tasked with issuing Federal Reserve Notes to private banks within its
+      district to facilitate commerce transactions. As such, the BEP no longer issues currency; rather, it produces
+      currency for and at the request of individual Federal Reserve Banks.
     </p>
 
-    <h2 class="my-6 text-2xl sm:text-3xl font-semibold tracking-tight">
+    <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
       Serial Numbers
     </h2>
 
     <p class="text-base/6 my-4">
-      Serial numbers are required to be on all notes issued by the BEP, both as a way to prevent counterfeiting as well
+      Serial numbers are required to be on all notes printed by the BEP, both as a way to prevent counterfeiting as well
       as to help the Federal Reserve track the notes in circulation. Each note of the same type, denomination, and
       series has a unique serial number following a specific formula. In the case of Federal Reserve Notes, the
       eight-digit serial number begins and ends with a letter, such as <span class="font-mono">A01234567A</span>. The
-      letter prefix indicates which Federal Reserve Bank issued the note, while the letter suffix advances for every
-      100,000,000 notes printed; though neither the letters <span class="font-mono">O</span> or
-      <span class="font-mono">Z</span> are used. Sometimes a sheet must be removed from the finished stack due to a
-      print error; it will be replaced by a "star" sheet--one where the letter suffix is replaced with a star, like
-      <span class="font-mono">A01234567*</span>. Beginning with Series 1996, a
-      <ULink active @click="seriesOpen = true">series letter</ULink> has been prepended to the serial number for all
-      denomination of five-dollars and higher, such as <span class="font-mono">QA01234567A</span>.
+      letter prefix indicates which <ULink active @click="frbOpen = true">Federal Reserve Bank</ULink> issued the note,
+      while the letter suffix advances for every 100,000,000 notes printed; though neither the letters
+      <span class="font-mono">O</span> or <span class="font-mono">Z</span> are used. Beginning with Series 1996, a
+      <ULink active @click="seriesOpen = true">series letter</ULink> was prepended to the serial number for all
+      denominations of five-dollars and higher, such as <span class="font-mono">QA01234567A</span>. The combination of
+      prefix and suffix letters create "blocks" of notes; a note with serial number
+      <span class="font-mono">PD01234567C</span> would be part of the <span class="font-mono">PDC</span> block.
     </p>
 
-    <p></p>
+    <p class="text-base/6 my-4">
+      Sometimes a note must be pulled from the finished stack due to a print error; it will be replaced by a "star"
+      note--one where the letter suffix is replaced with a star, like <span class="font-mono">A01234567*</span>.
+      Entire sheets are sometimes replaced in the same way. No attempt is made to match serial numbers replaced by
+      star notes, and no records are kept as to which serial numbers were replaced. As printing errors are infrequent,
+      star notes are comparitively rare in circulation.
+    </p>
 
     <UModal v-model:open="frbOpen" title="Federal Reserve Banks">
       <template #body>
