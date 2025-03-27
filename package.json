@@ -16,7 +16,9 @@
     "@iconify-json/simple-icons": "^1.2.26",
     "@nuxt/image": "1.9.0",
     "@nuxt/ui": "3.0.0-alpha.13",
-    "nuxt": "^3.15.4"
+    "chart.js": "^4.4.8",
+    "nuxt": "^3.15.4",
+    "vue-chartjs": "^5.3.2"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.2",
