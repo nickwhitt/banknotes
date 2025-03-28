@@ -14,8 +14,8 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.26",
     "@iconify-json/simple-icons": "^1.2.26",
-    "@nuxt/image": "1.9.0",
-    "@nuxt/ui": "3.0.0-alpha.13",
+    "@nuxt/image": "^1.9.0",
+    "@nuxt/ui": "^3.0.0",
     "chart.js": "^4.4.8",
     "nuxt": "^3.15.4",
     "vue-chartjs": "^5.3.2"
@@ -26,15 +26,7 @@
     "eslint": "^9.21.0",
     "typescript": "^5.7.3"
   },
-  "overrides": {
-    "tailwindcss": "4.0.7",
-    "@tailwindcss/postcss": "4.0.7",
-    "@tailwindcss/vite": "4.0.7"
-  },
-  "resolutions": {
-    "tailwindcss": "4.0.7",
-    "@tailwindcss/postcss": "4.0.7",
-    "@tailwindcss/vite": "4.0.7"
-  },
+  "overrides": {},
+  "resolutions": {},
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

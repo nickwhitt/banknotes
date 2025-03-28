@@ -1,7 +1,7 @@
 <template>
   <div>
     <PageHeader :crumbs="[
-      { label: 'Federal Reserve Note' }, { label: series?.code }, { label: '$' + route.params.note }
+      { label: 'Federal Reserve Notes' }, { label: series?.title }, { label: '$' + route.params.note }
     ]" />
     <UContainer class="mx-0 lg:px-2 xl:px-8">
 

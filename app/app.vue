@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { type NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from '@nuxt/ui'
 
 const route = useRoute()
 const menuOpen = ref(false)
@@ -65,6 +65,7 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2021',
     children: [
+      { label: 'Summary', to: '/series/2021' },
       { label: 'One-Dollar Notes', to: '/series/s2021/notes/1' },
       { label: 'Five-Dollar Notes', to: '/series/g2021/notes/5' },
       { label: 'Ten-Dollar Notes', to: '/series/g2021/notes/10' },
@@ -76,6 +77,7 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2017-A',
     children: [
+      { label: 'Summary' },
       { label: 'One-Dollar Notes', to: '/series/s2017a/notes/1' },
       { label: 'Two-Dollar Notes', to: '/series/s2017a/notes/2' },
       { label: 'Five-Dollar Notes' },
@@ -88,6 +90,7 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2017',
     children: [
+      { label: 'Summary' },
       { label: 'One-Dollar Notes' },
       { label: 'Ten-Dollar Notes' },
       { label: 'Twenty-Dollar Notes' },
@@ -96,6 +99,7 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2013',
     children: [
+      { label: 'Summary' },
       { label: 'One-Dollar Notes' },
       { label: 'Two-Dollar Notes' },
       { label: 'Five-Dollar Notes' },
