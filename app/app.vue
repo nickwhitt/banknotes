@@ -80,11 +80,11 @@ const frnNavItems = ref<NavigationMenuItem[]>([
       { label: 'Summary' },
       { label: 'One-Dollar Notes', to: '/series/s2017a/notes/1' },
       { label: 'Two-Dollar Notes', to: '/series/s2017a/notes/2' },
-      { label: 'Five-Dollar Notes' },
-      { label: 'Ten-Dollar Notes' },
+      { label: 'Five-Dollar Notes', to: '/series/g2017a/notes/5' },
+      { label: 'Ten-Dollar Notes', to: '/series/g2017a/notes/10' },
       { label: 'Twenty-Dollar Notes', to: '/series/g2017a/notes/20' },
-      { label: 'Fifty-Dollar Notes' },
-      { label: 'One-Hundred-Dollar Notes' },
+      { label: 'Fifty-Dollar Notes', to: '/series/g2017a/notes/50' },
+      { label: 'One-Hundred-Dollar Notes', to: '/series/g2017a/notes/100' },
     ]
   },
   {
