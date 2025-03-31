@@ -24,11 +24,11 @@
         label: 'Star',
         runs: star,
         fw: star.some(isFw) ? catalog?.fw + bank.letter + '*' : '',
-        dc: star.some(isDc) ? catalog?.fw + bank.letter + '*' : '',
+        dc: star.some(isDc) ? catalog?.dc + bank.letter + '*' : '',
       }] : []),
     ]">
       <template #content="{ item }">
-        <PrintRunsStats :runs="new PrintRuns(item.runs)" :fw-catalog="item.fw" :dc-catalog="item.dc"
+        <BankStats :runs="new PrintRuns(item.runs)" :fw-catalog="item.fw" :dc-catalog="item.dc"
           :fw-owned="item.runs.filter(isFw).some(isOwned)" :dc-owned="item.runs.filter(isDc).some(isOwned)" />
         <BankBlocksList :series="series" :bank="bank" :runs="item.runs" />
       </template>
@@ -40,8 +40,7 @@
 <script setup lang="ts">
 import formatNumber from '~~/utils/formatNumber'
 import type { Bank } from '~~/types/Bank'
-import { type Run, isDc, isFw, isOwned, isStar, notStar } from '~~/types/Run'
-import { PrintRuns } from './PrintRunsStats.vue'
+import { PrintRuns, type Run, isDc, isFw, isOwned, isStar, notStar } from '~~/types/Run'
 import type { Series } from '~~/types/Series'
 import type { Catalog } from '~~/types/Catalog'
 

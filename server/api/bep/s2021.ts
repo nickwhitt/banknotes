@@ -35,7 +35,7 @@ export default defineEventHandler(() => {
     { year: 2024, month: 9, facility: fw, denom: 1, series: s2021, bank: banks.l, block: 'G', start: 1, end: 12800000 },
     { year: 2024, month: 9, facility: fw, denom: 1, series: s2021, bank: banks.l, block: 'F', start: 32000001, end: 96000000 },
     { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.g, block: 'D', start: 1, end: 51200000 },
-    { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.g, block: 'C', start: 25600001, end: 96000000 },
+    { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.g, block: 'C', start: 25600001, end: 96000000, owned: true },
     { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.k, block: 'C', start: 1, end: 51200000 },
     { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.k, block: '*', start: 12800001, end: 13050000 },
     { year: 2024, month: 8, facility: fw, denom: 1, series: s2021, bank: banks.k, block: '*', start: 16000001, end: 19200000 },
@@ -142,7 +142,7 @@ export default defineEventHandler(() => {
     { year: 2023, month: 4, facility: fw, denom: 1, series: s2021, bank: banks.d, block: 'A', start: 6400001, end: 76800000 },
     { year: 2023, month: 4, facility: fw, denom: 1, series: s2021, bank: banks.l, block: 'A', start: 25600001, end: 64000000 },
     { year: 2023, month: 4, facility: fw, denom: 1, series: s2021, bank: banks.d, block: '*', start: 1, end: 3200000 },
-    { year: 2023, month: 3, facility: dc, denom: 1, series: s2021, bank: banks.g, block: 'A', start: 1, end: 38400000 },
+    { year: 2023, month: 3, facility: dc, denom: 1, series: s2021, bank: banks.g, block: 'A', start: 1, end: 38400000, owned: true },
     { year: 2023, month: 3, facility: dc, denom: 1, series: s2021, bank: banks.g, block: '*', start: 1, end: 3200000 },
     { year: 2023, month: 3, facility: fw, denom: 1, series: s2021, bank: banks.a, block: 'A', start: 70400001, end: 96000000 },
     { year: 2023, month: 3, facility: fw, denom: 1, series: s2021, bank: banks.a, block: 'B', start: 1, end: 32000000 },
@@ -156,5 +156,6 @@ export default defineEventHandler(() => {
     { year: 2023, month: 1, facility: fw, denom: 1, series: s2021, bank: banks.b, block: 'A', start: 25600001, end: 64000000 },
     { year: 2023, month: 1, facility: fw, denom: 1, series: s2021, bank: banks.b, block: '*', start: 1, end: 500000, sheets: true },
     { year: 2023, month: 1, facility: fw, denom: 1, series: s2021, bank: banks.b, block: '*', start: 3200001, end: 6400000 },
+    { year: 2022, month: 12, facility: fw, denom: 1, series: s2021, bank: banks.b, block: 'A', start: 1, end: 25600000 },
   ] as Run[]
 })

@@ -65,7 +65,6 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2021',
     children: [
-      { label: 'Summary', to: '/series/2021' },
       { label: 'One-Dollar Notes', to: '/series/s2021/notes/1' },
       { label: 'Five-Dollar Notes', to: '/series/g2021/notes/5' },
       { label: 'Ten-Dollar Notes', to: '/series/g2021/notes/10' },
@@ -77,20 +76,18 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2017-A',
     children: [
-      { label: 'Summary' },
       { label: 'One-Dollar Notes', to: '/series/s2017a/notes/1' },
       { label: 'Two-Dollar Notes', to: '/series/s2017a/notes/2' },
-      { label: 'Five-Dollar Notes' },
+      { label: 'Five-Dollar Notes', to: '/series/g2017a/notes/5' },
       { label: 'Ten-Dollar Notes', to: '/series/g2017a/notes/10' },
       { label: 'Twenty-Dollar Notes', to: '/series/g2017a/notes/20' },
-      { label: 'Fifty-Dollar Notes' },
+      { label: 'Fifty-Dollar Notes', to: '/series/g2017a/notes/50' },
       { label: 'One-Hundred-Dollar Notes', to: '/series/g2017a/notes/100' },
     ]
   },
   {
     label: 'Series 2017',
     children: [
-      { label: 'Summary' },
       { label: 'One-Dollar Notes' },
       { label: 'Ten-Dollar Notes' },
       { label: 'Twenty-Dollar Notes' },
@@ -99,7 +96,6 @@ const frnNavItems = ref<NavigationMenuItem[]>([
   {
     label: 'Series 2013',
     children: [
-      { label: 'Summary' },
       { label: 'One-Dollar Notes' },
       { label: 'Two-Dollar Notes' },
       { label: 'Five-Dollar Notes' },

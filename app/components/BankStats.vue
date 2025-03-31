@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import formatNumber from '~~/utils/formatNumber'
 import { facilities } from '~~/types/Facility'
+import type { PrintRuns } from '~~/types/Run';
 
 interface Props {
   runs: PrintRuns,
@@ -51,32 +52,4 @@ interface Props {
   fwOwned?: boolean
 }
 const props = defineProps<Props>()
-</script>
-
-<script lang="ts">
-import { isDc, type Run } from '~~/types/Run'
-
-export class PrintRuns {
-  printed: number = 0
-  dc: number = 0
-  fw: number = 0
-
-  constructor(runs: Run[]) {
-    this.printed = runs.reduce((printed, run) => printed + run.end - run.start + 1, 0)
-    this.dc = runs.filter(isDc).reduce((printed, run) => printed + run.end - run.start + 1, 0)
-    this.fw = this.printed - this.dc
-  }
-
-  getPercentageDC(): number {
-    return this.calcPercentage(this.dc)
-  }
-
-  getPercentageFW(): number {
-    return 100 - this.calcPercentage(this.dc)
-  }
-
-  calcPercentage(numerator: number): number {
-    return Math.floor(numerator / this.printed * 100) || 0
-  }
-}
 </script>

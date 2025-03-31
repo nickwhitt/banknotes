@@ -9,6 +9,8 @@
         Series of {{ series?.title }} ${{ route.params.note }}
       </h1>
 
+      <SeriesStats :total="new PrintRuns(runs)" :stats="stats" />
+
       <article class="my-6 grid md:grid-cols-2 2xl:grid-cols-3 gap-y-4 gap-x-2 xl:gap-x-4">
         <BankBlocksCard v-for="bank in banks" :series="series" :bank="bank" :catalog="catalog"
           :runs="runs?.filter((item) => item.bank.letter === bank.letter) || []" />
@@ -21,6 +23,7 @@
 
 <script setup lang="ts">
 import { banks } from '~~/types/Bank'
+import { isDc, isFw, isStar, notStar, PrintRuns } from '~~/types/Run'
 import { allSeries } from '~~/types/Series'
 
 const route = useRoute()
@@ -45,4 +48,11 @@ runs.value?.sort(
 ).sort(
   (a, b) => new Date(a.year, a.month).getTime() - new Date(b.year, b.month).getTime()
 )
+
+const stats = [
+  { label: 'Regular Notes', runs: new PrintRuns(runs.value.filter(notStar)) },
+  { label: 'Star Notes', runs: new PrintRuns(runs.value.filter(isStar)) },
+  { label: 'Washington', runs: new PrintRuns(runs.value.filter(isDc)) },
+  { label: 'Fort Worth', runs: new PrintRuns(runs.value.filter(isFw)) },
+]
 </script>

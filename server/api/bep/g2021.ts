@@ -135,14 +135,14 @@ export default defineEventHandler(() => {
     { year: 2023, month: 9, facility: fw, denom: 5, series: g2021, bank: banks.g, block: 'A', start: 1, end: 70400000 },
     { year: 2023, month: 9, facility: fw, denom: 5, series: g2021, bank: banks.i, block: 'A', start: 1, end: 32000000 },
     { year: 2023, month: 9, facility: fw, denom: 5, series: g2021, bank: banks.j, block: 'A', start: 1, end: 25600000 },
-    { year: 2023, month: 9, facility: fw, denom: 5, series: g2021, bank: banks.i, block: '*', start: 1, end: 3200000 },
+    { year: 2023, month: 9, facility: fw, denom: 5, series: g2021, bank: banks.i, block: '*', start: 1, end: 3200000, owned: true },
     { year: 2023, month: 8, facility: fw, denom: 5, series: g2021, bank: banks.f, block: 'A', start: 38400001, end: 96000000 },
     { year: 2023, month: 8, facility: fw, denom: 5, series: g2021, bank: banks.f, block: 'B', start: 1, end: 12800000 },
     { year: 2023, month: 8, facility: fw, denom: 5, series: g2021, bank: banks.h, block: 'A', start: 1, end: 51200000 },
     { year: 2023, month: 8, facility: fw, denom: 5, series: g2021, bank: banks.k, block: 'A', start: 38400001, end: 83200000 },
     { year: 2023, month: 8, facility: fw, denom: 5, series: g2021, bank: banks.f, block: '*', start: 1, end: 640000, sheets: true },
 
-    { year: 2023, month: 7, facility: fw, denom: 5, series: g2021, bank: banks.d, block: 'A', start: 57600001, end: 96000000 },
+    { year: 2023, month: 7, facility: fw, denom: 5, series: g2021, bank: banks.d, block: 'A', start: 57600001, end: 96000000, owned: true },
     { year: 2023, month: 7, facility: fw, denom: 5, series: g2021, bank: banks.f, block: 'A', start: 1, end: 38400000 },
     { year: 2023, month: 7, facility: fw, denom: 5, series: g2021, bank: banks.k, block: 'A', start: 1, end: 38400000 },
 
@@ -160,5 +160,11 @@ export default defineEventHandler(() => {
     { year: 2023, month: 4, facility: fw, denom: 5, series: g2021, bank: banks.e, block: 'A', start: 1, end: 38400000 },
     { year: 2023, month: 4, facility: fw, denom: 5, series: g2021, bank: banks.b, block: '*', start: 1, end: 640000, sheets: true },
     { year: 2023, month: 4, facility: fw, denom: 5, series: g2021, bank: banks.b, block: '*', start: 3200001, end: 6400000 },
+    { year: 2022, month: 12, facility: fw, denom: 5, series: g2021, bank: banks.a, block: 'A', start: 32000001, end: 57600000 },
+    { year: 2022, month: 12, facility: fw, denom: 5, series: g2021, bank: banks.l, block: 'A', start: 32000001, end: 89600000 },
+    { year: 2022, month: 11, facility: fw, denom: 5, series: g2021, bank: banks.a, block: 'A', start: 1, end: 32000000 },
+    { year: 2022, month: 11, facility: fw, denom: 5, series: g2021, bank: banks.l, block: 'A', start: 1, end: 32000000 },
+    { year: 2022, month: 11, facility: fw, denom: 5, series: g2021, bank: banks.a, block: '*', start: 1, end: 500000, sheets: true },
+    { year: 2022, month: 11, facility: fw, denom: 5, series: g2021, bank: banks.a, block: '*', start: 3200001, end: 4800000 },
   ] as Run[]
 })
