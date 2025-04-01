@@ -5,13 +5,31 @@
     ]" />
     <UContainer class="mx-0 lg:px-2 xl:px-8">
 
-      <h1 class="my-8 text-3xl sm:text-4xl font-semibold tracking-tight">
-        Series of {{ series?.title }} ${{ route.params.note }}
-      </h1>
+      <header class="my-8 flex flex-col gap-y-2">
+        <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight">
+          ${{ route.params.note }} Federal Reserve Notes
+        </h1>
+        <ul class="flex flex-wrap items-end gap-x-4">
+          <li class="text-2xl sm:text-3xl tracking-tight">
+            Series of {{ series?.title }}
+          </li>
+          <li class="text-xl sm:text-2xl tracking-tight">
+            {{ series?.treasurer }} | {{ series?.secretary }}
+          </li>
+        </ul>
+      </header>
+
+      <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
+        Stats
+      </h2>
 
       <SeriesStats :total="new PrintRuns(runs)" :stats="stats" />
 
-      <article class="my-6 grid md:grid-cols-2 2xl:grid-cols-3 gap-y-4 gap-x-2 xl:gap-x-4">
+      <h2 class="my-6 text-xl sm:text-2xl font-semibold tracking-tight">
+        Districts
+      </h2>
+
+      <article class="grid md:grid-cols-2 2xl:grid-cols-3 gap-y-4 gap-x-2 xl:gap-x-4">
         <BankBlocksCard v-for="bank in banks" :series="series" :bank="bank" :catalog="catalog"
           :runs="runs?.filter((item) => item.bank.letter === bank.letter) || []" />
       </article>
