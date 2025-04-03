@@ -21,6 +21,8 @@ export default defineNuxtConfig({
         '/series/g2017a/notes/20',
         '/series/g2017a/notes/50',
         '/series/g2017a/notes/100',
+        '/series/s2017/notes/1',
+        '/series/g2013/notes/50',
       ],
     },
   },
