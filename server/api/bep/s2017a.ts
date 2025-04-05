@@ -157,5 +157,18 @@ export default defineEventHandler(() => {
     { year: 2019, month: 11, facility: fw, denom: 1, series: s2017a, bank: banks.k, block: 'A', start: 1, end: 44800000 },
     { year: 2019, month: 11, facility: fw, denom: 1, series: s2017a, bank: banks.l, block: 'A', start: 1, end: 19200000 },
     { year: 2019, month: 11, facility: fw, denom: 1, series: s2017a, bank: banks.l, block: '*', start: 1, end: 3200000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.b, block: 'A', start: 12800001, end: 25600000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.c, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.d, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.e, block: 'A', start: 1, end: 12800000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.h, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.i, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.j, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 9, facility: fw, denom: 2, series: s2017a, bank: banks.c, block: '*', start: 3200001, end: 3280000, sheets: true },
+    { year: 2019, month: 8, facility: fw, denom: 2, series: s2017a, bank: banks.a, block: 'A', start: 1, end: 6400000 },
+    { year: 2019, month: 8, facility: fw, denom: 2, series: s2017a, bank: banks.b, block: 'A', start: 1, end: 12800000 },
+    { year: 2019, month: 8, facility: fw, denom: 2, series: s2017a, bank: banks.g, block: 'A', start: 1, end: 12800000 },
+    { year: 2019, month: 8, facility: fw, denom: 2, series: s2017a, bank: banks.c, block: '*', start: 1, end: 960000 },
+    { year: 2019, month: 8, facility: fw, denom: 2, series: s2017a, bank: banks.k, block: 'A', start: 1, end: 12800000 },
   ] as Run[]
 })
